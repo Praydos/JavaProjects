@@ -1,5 +1,5 @@
 
-## 📝 Mini Report – Spring Boot Application with Spring Security
+## 📝 Mini Report – Spring Boot Auth Application with Spring Security
 
 ### 1. **Application Objective**
 
