@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome ✨</title>
+    <meta name="description" content="A clean, modern welcome page." />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%230ea5e9'/%3E%3Cpath d='M18 34c0-8 6-14 14-14s14 6 14 14-6 14-14 14S18 42 18 34z' fill='%23fff'/%3E%3C/svg%3E" />
+    <style>
+        /* ====== CSS Variables ====== */
+        :root {
+            --bg: 245 245 250;
+            --fg: 22 22 26;
+            --muted: 99 102 241;
+            --brand: 14 165 233; /* sky-500 */
+            --brand-2: 99 102 241; /* indigo-500 */
+            --card: 255 255 255;
+            --ring: 14 165 233;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: 10 10 14;
+                --fg: 232 232 238;
+                --card: 20 20 28;
+            }
+        }
+
+        /* ====== Base Reset ====== */
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { height: 100%; }
+        body {
+            margin: 0;
+            font: 16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            color: rgb(var(--fg));
+            background: radial-gradient(1200px 800px at 20% 10%, rgba(var(--brand), .15), transparent 60%),
+            radial-gradient(900px 700px at 80% 30%, rgba(var(--brand-2), .18), transparent 60%),
+            rgb(var(--bg));
+            display: grid;
+            place-items: center;
+            padding: 2rem;
+        }
+
+        /* ====== Card ====== */
+        .card {
+            width: min(720px, 100%);
+            background: linear-gradient(180deg, rgba(var(--card), .86), rgba(var(--card), .92));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0,0,0,.06);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08), 0 1px 0 rgba(255,255,255,.05) inset;
+            overflow: clip;
+            animation: floatIn .8s ease-out both;
+        }
+
+        .ribbon {
+            height: 6px;
+            background: linear-gradient(90deg, rgb(var(--brand)), rgb(var(--brand-2)) 60%, rgb(var(--brand)));
+        }
+
+        .content {
+            padding: clamp(1.25rem, 2vw + 1rem, 2.25rem) clamp(1.25rem, 2.5vw + 1rem, 2.5rem) 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 3.8vw + .5rem, 3rem);
+            line-height: 1.1;
+            margin: 0 0 .5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            margin: 0 0 1.25rem;
+            font-size: clamp(1rem, 1.3vw + .7rem, 1.125rem);
+            opacity: .9;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            background: rgba(var(--brand), .12);
+            color: rgb(var(--brand));
+            border: 1px solid rgba(var(--brand), .25);
+            padding: .4rem .7rem;
+            border-radius: 999px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-size: .75rem;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+            margin-top: 1.25rem;
+        }
+
+        .btn {
+            appearance: none;
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(180deg, rgb(var(--brand)), rgb(var(--brand-2)));
+            color: white;
+            padding: .9rem 1.2rem;
+            border-radius: 14px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            box-shadow: 0 6px 16px rgba(14, 165, 233, .25);
+            transform: translateY(0);
+            transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px rgba(14,165,233,.28); }
+        .btn:active { transform: translateY(0); filter: saturate(.95); }
+
+        .btn.secondary {
+            background: transparent;
+            color: rgb(var(--fg));
+            border: 1px solid rgba(0,0,0,.12);
+            box-shadow: none;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        @media (min-width: 720px) {
+            .grid { grid-template-columns: 1.25fr .75fr; align-items: center; }
+        }
+
+        .hero {
+            padding: .75rem 0 0;
+        }
+
+        .panel {
+            border: 1px solid rgba(0,0,0,.08);
+            border-radius: 16px;
+            padding: 1rem;
+            background: rgba(255,255,255,.5);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .panel { background: rgba(255,255,255,.04); border-color: rgba(255,255,255,.08); }
+        }
+
+        .list {
+            display: grid;
+            gap: .7rem;
+            list-style: none;
+            padding: 0; margin: 0;
+            font-size: .975rem;
+        }
+
+        .list li { display: flex; gap: .6rem; align-items: flex-start; }
+        .dot {
+            width: .65rem; height: .65rem; border-radius: 50%;
+            background: linear-gradient(180deg, rgb(var(--brand)), rgb(var(--brand-2)));
+            margin-top: .45rem;
+            flex: none;
+            box-shadow: 0 0 0 2px rgba(0,0,0,.06);
+        }
+
+        footer {
+            text-align: center;
+            font-size: .85rem;
+            opacity: .7;
+            padding: 1.2rem 1rem 0 1rem;
+        }
+
+        /* ====== Simple animation ====== */
+        @keyframes floatIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+<main class="card" role="main" aria-labelledby="welcomeTitle">
+    <div class="ribbon" aria-hidden="true"></div>
+    <div class="content">
+        <span class="badge" aria-label="welcome badge">Welcome</span>
+
+        <div class="grid">
+            <section class="hero" aria-describedby="subtitle">
+                <h1 id="welcomeTitle">Welcome to Your Space</h1>
+                <p id="subtitle" class="subtitle">We're happy you're here. Relax, explore, and make yourself at home.</p>
+                <div class="actions">
+                    <a class="btn" href="/admin/home" aria-label="Get started">Admin Panel</a>
+                    <a class="btn secondary" href="/home" aria-label="Learn more">Home</a>
+                </div>
+            </section>
+
+            <aside class="panel" id="learn-more" aria-label="Helpful info">
+                <ul class="list">
+                    <li><span class="dot" aria-hidden="true"></span><span>Fast, responsive design that looks great on any device.</span></li>
+                    <li><span class="dot" aria-hidden="true"></span><span>Accessible markup with semantic tags and focusable controls.</span></li>
+                    <li><span class="dot" aria-hidden="true"></span><span>Built with modern, lightweight CSS—no frameworks needed.</span></li>
+                </ul>
+            </aside>
+        </div>
+
+<!--        <section id="get-started" style="margin-top:1.5rem">-->
+<!--            <h2 style="margin:.25rem 0 0">Getting Started</h2>-->
+<!--            <p style="margin:.4rem 0 0.6rem">Customize this message, add your logo, or link the buttons above to your pages.</p>-->
+<!--        </section>-->
+
+        <footer>
+            <p>© <span id="year">2025</span> — Welcome Page</p>
+        </footer>
+    </div>
+</main>
+
+<!-- If you want to keep it strictly HTML+CSS, you can remove this tiny script. It only updates the year. -->
+<script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
